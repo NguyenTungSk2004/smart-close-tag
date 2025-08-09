@@ -1,8 +1,8 @@
 {
   "name": "smart-close-tag",
   "displayName": "Smart Close Tag",
-  "description": "Tự động hoàn thiện cặp thẻ khi gõ TagName/ và nhấn Tab trong HTML, XML, XAML. Ví dụ: Button/ + Tab → <Button></Button>",
-  "version": "0.0.1",
+  "description": "Tự động hoàn thiện cặp thẻ khi gõ TagName/ trong HTML, XML, XAML. Ví dụ: Button/ → <Button></Button>",
+  "version": "1.0.2",
   "publisher": "NguyenTungSk2004",
   "icon": "icon.jpg",
   "engines": {
@@ -38,13 +38,6 @@
       {
         "command": "intelliCloseTag.enable",
         "title": "Enable Smart Close Tag"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "type",
-        "key": "tab",
-        "when": "editorTextFocus && (editorLangId == html || editorLangId == xml || editorLangId == xaml || editorLangId == AXAML)"
       }
     ],
     "languages": [
