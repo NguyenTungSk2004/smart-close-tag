@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Test Smart Close Tag - XAML" Height="350" Width="525">
+    <Grid>
+        <!-- Test extension XAML ở đây -->
+        <!-- Gõ Button/ rồi nhấn Tab -->
+        <!-- Gõ TextBox/ rồi nhấn Tab -->
+        <!-- Gõ StackPanel/ rồi nhấn Tab -->
+        <!-- Gõ Grid.Row/ rồi nhấn Tab -->
+        
+        <!-- Gõ my:CustomControl/ rồi nhấn Tab -->
+        
+    </Grid>
+</Window>

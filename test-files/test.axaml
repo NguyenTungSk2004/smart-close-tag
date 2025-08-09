@@ -1,0 +1,6 @@
+<!-- Test file cho Avalonia XAML -->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,93 @@
+{
+  "name": "smart-close-tag",
+  "displayName": "Smart Close Tag",
+  "description": "Tự động hoàn thiện cặp thẻ khi gõ TagName/ và nhấn Tab trong HTML, XML, XAML. Ví dụ: Button/ + Tab → <Button></Button>",
+  "version": "0.0.1",
+  "publisher": "NguyenTungSk2004",
+  "icon": "icon.jpg",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NguyenTungSk2004/smart-close-tag"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "html",
+    "xml",
+    "xaml",
+    "axaml",
+    "tag",
+    "auto-complete",
+    "snippet",
+    "productivity"
+  ],
+  "activationEvents": [
+    "onLanguage:xaml",
+    "onLanguage:AXAML",
+    "onLanguage:xml",
+    "onLanguage:html"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "intelliCloseTag.enable",
+        "title": "Enable Smart Close Tag"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "type",
+        "key": "tab",
+        "when": "editorTextFocus && (editorLangId == html || editorLangId == xml || editorLangId == xaml || editorLangId == AXAML)"
+      }
+    ],
+    "languages": [
+      {
+        "id": "xaml",
+        "aliases": ["XAML"],
+        "extensions": [".xaml"]
+      },
+      {
+        "id": "AXAML",
+        "aliases": ["Avalonia XAML", "AXAML"],
+        "extensions": [".axaml"]
+      },
+      {
+        "id": "xml",
+        "aliases": ["XML"],
+        "extensions": [".xml"]
+      },
+      {
+        "id": "html",
+        "aliases": ["HTML"],
+        "extensions": [".html", ".htm"]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
+    "typescript": "^5.9.2",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  },
+  "license": "MIT"
+}
