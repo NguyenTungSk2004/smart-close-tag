@@ -1,8 +1,8 @@
 {
   "name": "smart-close-tag",
-  "displayName": "Smart Close Tag",
-  "description": "Tự động hoàn thiện cặp thẻ khi gõ TagName/ trong HTML, XML, XAML. Ví dụ: Button/ → <Button></Button>",
-  "version": "1.0.2",
+  "displayName": "Smart Close Tag - Universal Auto Close Tag & Wrapper",
+  "description": "Fast universal auto close tag extension for VS Code. Auto-close paired tags (TagName/), self-closing tags (TagName//), supports attributes, triggers on '>' and '</', wraps selections (Alt+W), and works across ALL file types (HTML, XML, XAML, JSX, TSX, Vue, Svelte, PHP, Markdown, etc.).",
+  "version": "1.1.0",
   "publisher": "NguyenTungSk2004",
   "icon": "icon.jpg",
   "engines": {
@@ -12,56 +12,142 @@
     "type": "git",
     "url": "https://github.com/NguyenTungSk2004/smart-close-tag"
   },
+  "bugs": {
+    "url": "https://github.com/NguyenTungSk2004/smart-close-tag/issues"
+  },
+  "homepage": "https://github.com/NguyenTungSk2004/smart-close-tag#readme",
   "categories": [
     "Snippets",
+    "Programming Languages",
     "Other"
   ],
   "keywords": [
+    "auto-close-tag",
+    "smart-close-tag",
+    "close-tag",
+    "tag-wrapper",
     "html",
     "xml",
     "xaml",
     "axaml",
-    "tag",
-    "auto-complete",
-    "snippet",
-    "productivity"
+    "jsx",
+    "tsx",
+    "react",
+    "vue",
+    "svelte",
+    "php",
+    "blade",
+    "astro",
+    "markdown",
+    "snippets",
+    "productivity",
+    "auto-complete"
   ],
   "activationEvents": [
-    "onLanguage:xaml",
-    "onLanguage:AXAML",
-    "onLanguage:xml",
-    "onLanguage:html"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
+        "command": "smartCloseTag.toggle",
+        "title": "Smart Close Tag: Toggle Enable/Disable",
+        "category": "Smart Close Tag"
+      },
+      {
+        "command": "smartCloseTag.wrapWithTag",
+        "title": "Smart Close Tag: Wrap Selection with Tag",
+        "category": "Smart Close Tag"
+      },
+      {
+        "command": "smartCloseTag.showMenu",
+        "title": "Smart Close Tag: Show Quick Menu",
+        "category": "Smart Close Tag"
+      },
+      {
         "command": "intelliCloseTag.enable",
-        "title": "Enable Smart Close Tag"
+        "title": "Smart Close Tag: Enable (Compatibility)",
+        "category": "Smart Close Tag"
       }
     ],
-    "languages": [
+    "keybindings": [
       {
-        "id": "xaml",
-        "aliases": ["XAML"],
-        "extensions": [".xaml"]
-      },
-      {
-        "id": "AXAML",
-        "aliases": ["Avalonia XAML", "AXAML"],
-        "extensions": [".axaml"]
-      },
-      {
-        "id": "xml",
-        "aliases": ["XML"],
-        "extensions": [".xml"]
-      },
-      {
-        "id": "html",
-        "aliases": ["HTML"],
-        "extensions": [".html", ".htm"]
+        "command": "smartCloseTag.wrapWithTag",
+        "key": "alt+w",
+        "mac": "alt+w",
+        "when": "editorTextFocus && editorHasSelection"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Smart Close Tag",
+      "properties": {
+        "smartCloseTag.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable Smart Close Tag features."
+        },
+        "smartCloseTag.enableForAllFiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Smart Close Tag across all file types (*)."
+        },
+        "smartCloseTag.includedLanguages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "*"
+          ],
+          "description": "List of language IDs where Smart Close Tag is active (supports '*' wildcard)."
+        },
+        "smartCloseTag.excludedLanguages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "List of language IDs to explicitly exclude from Smart Close Tag."
+        },
+        "smartCloseTag.enableAttributesSupport": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow typing TagName with attributes followed by '/' (e.g. `div class=\"box\"/`)."
+        },
+        "smartCloseTag.enableAutoCloseOnGreaterThan": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically insert matching closing tag when typing '>' after an opening tag `<Tag>`."
+        },
+        "smartCloseTag.enableAutoCloseOnSlash": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically complete the matching closing tag when typing '</'."
+        },
+        "smartCloseTag.selfClosingFormat": {
+          "type": "string",
+          "enum": [
+            "slash",
+            "void"
+          ],
+          "default": "slash",
+          "description": "Format for self-closing elements: 'slash' (<img />) or 'void' (<img>)."
+        },
+        "smartCloseTag.selfClosingTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Additional custom tag names to treat as self-closing or void elements."
+        },
+        "smartCloseTag.showStatusBarItem": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Smart Close Tag status bar indicator."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

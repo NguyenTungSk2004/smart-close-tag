@@ -1,15 +1,31 @@
 import * as assert from 'assert';
-
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
-// import * as myExtension from '../../extension';
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+suite('Smart Close Tag Integration Test Suite', () => {
+  test('Commands are registered', async () => {
+    const allCommands = await vscode.commands.getCommands(true);
+    assert.ok(allCommands.includes('smartCloseTag.toggle'), 'smartCloseTag.toggle should be registered');
+    assert.ok(allCommands.includes('smartCloseTag.wrapWithTag'), 'smartCloseTag.wrapWithTag should be registered');
+    assert.ok(allCommands.includes('smartCloseTag.showMenu'), 'smartCloseTag.showMenu should be registered');
+    assert.ok(allCommands.includes('intelliCloseTag.enable'), 'intelliCloseTag.enable should be registered');
+  });
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
-	});
+  test('Completion provider is available on untitled documents', async () => {
+    const doc = await vscode.workspace.openTextDocument({
+      language: 'javascript',
+      content: 'Button/'
+    });
+    const position = new vscode.Position(0, 7);
+    const list = await vscode.commands.executeCommand<vscode.CompletionList>(
+      'vscode.executeCompletionItemProvider',
+      doc.uri,
+      position,
+      '/'
+    );
+
+    assert.ok(list, 'Completion list should be returned');
+    assert.ok(list.items.length > 0, 'Should return at least one completion item');
+    const item = list.items.find((i: vscode.CompletionItem) => typeof i.label === 'string' && i.label.includes('Button'));
+    assert.ok(item, 'Should have completion for Button');
+  });
 });
